@@ -1,0 +1,53 @@
+﻿@model List<First_Blog.tmp.tmpPost>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 id="head"></h2>
+
+<table id="posts" class="table">
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+
+
+
+@section scripts
+{
+    <script>
+         $(document).ready(function () {
+
+             var tmp = localStorage.getItem("cat");
+             document.getElementById("head").innerHTML = tmp;
+             var tabledata = '';
+             $.ajax({
+
+                 url: "/api/Posts/get_posts",
+                 type: "GET",
+                 data: { text: tmp },
+                 success: function (data) {
+                     for (var i = 0; i < data.length; i++) {
+                         tabledata += '<tr><td>'
+                             + "<b style='color:firebrick;font-size:large;'>" + data[i].title + "</b>" +"<br>"+
+                              "<a href='/posts/Details/" + data[i].categoryid + "'>Read Full Blog </a>" +
+                             '</td></tr>';
+                     }
+                     $("#posts").append(tabledata);
+                     
+                 }
+                    
+              
+             });
+             
+
+
+         });
+
+    </script>
+
+}

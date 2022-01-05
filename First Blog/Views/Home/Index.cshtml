@@ -1,0 +1,60 @@
+﻿@model IEnumerable<First_Blog.tmp.tmpPost>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Blog Home Page..</h2>
+<p>
+
+    @Html.ActionLink("New Post", "Create_post", "Posts", null, new { @class = "btn btn-primary" })&emsp;
+    @Html.ActionLink("New Category", "Create_cat", "Posts", null, new { @class = "btn btn-primary" })
+</p>
+
+
+
+    <table class="table" id="posts">
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>
+                <b style="color:firebrick;font-size:large;">@item.title</b>
+                <br />
+
+                <a href="/posts/Update/@item.Id"> Update Full Blog</a>
+                <br />
+
+                <button class="btn-link js-delete" var=@item.Id id="del">Delete</button>
+            </td>
+        </tr>
+    }
+    </table>
+
+@section scripts
+{
+   
+   <script>
+       $(document).ready(function () {
+           var table = $("#posts");
+
+           $("#posts").on("click", ".js-delete", function () {
+               var but = $(this);
+
+               var parent = but.parent('td').parent('tr');
+               if (confirm("Are you sure you want to delete this Post?")) {
+                   $.ajax({
+                       url: "/api/posts/Delete/" + but.attr("var"),
+                       type: "DELETE",
+                       success: function () {
+                           parent.remove().draw();
+                       }
+
+                   });
+           }
+
+           });
+
+       });
+    </script>
+
+
+    }

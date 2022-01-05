@@ -1,0 +1,11 @@
+﻿@model First_Blog.tmp.tmpPost
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <b style="color:firebrick;font-size:large;">@Html.DisplayFor(p =>p.title)</b>
+
+    <p>@Html.DisplayFor(p =>p.content)</p>
+
+

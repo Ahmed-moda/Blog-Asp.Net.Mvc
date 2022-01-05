@@ -1,0 +1,20 @@
+﻿@model First_Blog.Models.category
+@{
+    ViewBag.Title = "Create_cat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Category</h2>
+
+@using(@Html.BeginForm("Save_cat","Posts"))
+
+{ 
+    @Html.LabelFor(c => c.Name);
+    @Html.TextBoxFor(c => c.Name,new {@class="form-control" });
+    @Html.ValidationMessageFor(c => c.Name);
+
+    <br />
+    <button type="submit">Save</button>
+
+}
+

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<First_Blog.tmp.tmpPost>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Blog Home Page..</h2>
+
+
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <b style="color:firebrick;font-size:large;">@item.title</b>
+                <br />
+
+                <a href="/posts/Details/@item.Id">Update Full Blog</a>
+            </td>
+        </tr>
+    }
+</table>

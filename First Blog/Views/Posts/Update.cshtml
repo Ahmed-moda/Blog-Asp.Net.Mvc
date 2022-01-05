@@ -1,0 +1,41 @@
+﻿@model First_Blog.tmp.catApost
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Update</h2>
+
+@using (Html.BeginForm("Save_U", "Posts"))
+{
+    <div class="form-group">
+
+        @Html.LabelFor(c => c.post.categoryid)
+        @Html.DropDownListFor(c => c.post.categoryid, new SelectList(Model.categories, "id", "Name"), "choose Category", new { @class = "form-control", id = "catid" })
+        @Html.ValidationMessageFor(m => m.post.categoryid)
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(c => c.post.title)
+        @Html.TextBoxFor(c => c.post.title, new { @class = "form-control", id = "tit" })
+        @Html.ValidationMessageFor(m => m.post.title)
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(c => c.post.content)
+        @Html.TextAreaFor(c => c.post.content, new { @class = "form-control", style = "height: 300px", id = "cont" })
+        @Html.ValidationMessageFor(m => m.post.content)
+    </div>
+
+    @Html.HiddenFor(c => c.post.Id, new { id = "posid" });
+    @Html.AntiForgeryToken()
+    <button id="save" type="submit" class="btn btn-primary">Save</button>
+
+}
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    }
